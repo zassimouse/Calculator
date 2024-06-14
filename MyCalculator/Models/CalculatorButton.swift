@@ -10,26 +10,24 @@ import UIKit
 
 enum CalculatorButton {
     
+    case clear
+    case number(Int)
     case add
-    case substract
+    case subtract
     case multiply
     case divide
-    
     case equals
-    case clear
-    
-    case number(Int)
     case decimal
     case plusMinus
     case percentage
     
     init(calculatorButton: CalculatorButton) {
+        
         switch calculatorButton {
-            
-        case .divide, .multiply, .substract, .add, .equals, .decimal, .clear, .plusMinus, .percentage:
+        case .divide, .multiply, .subtract, .add, .equals, .decimal, .clear, .plusMinus, .percentage:
             self = calculatorButton
-        case .number(let int):
-            if int.description.count == 1 {
+        case .number(let value):
+            if value.description.count == 1 {
                 self = calculatorButton
             } else {
                 fatalError("Int is not 1 digit")
@@ -39,12 +37,12 @@ enum CalculatorButton {
 }
 
 extension CalculatorButton {
+    
     var title: String {
         switch self {
-            
         case .add:
             return "+"
-        case .substract:
+        case .subtract:
             return "-"
         case .multiply:
             return "×"
@@ -65,7 +63,8 @@ extension CalculatorButton {
         }
     }
     
-    var color: UIColor {
+    var backgroundColor: UIColor {
+        
         switch self {
         case .clear:
             return .calculatorRed
@@ -77,16 +76,15 @@ extension CalculatorButton {
     }
     
     var textColor: UIColor {
+        
         switch self {
         case .clear, .equals:
             return .calculatorGrey
-        case .add, .substract, .multiply, .divide, .percentage:
+        case .add, .subtract, .multiply, .divide, .percentage:
             return .calculatorGreen
         default:
             return .white
         }
     }
-    
-    
 }
  

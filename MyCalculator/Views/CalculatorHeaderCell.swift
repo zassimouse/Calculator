@@ -10,16 +10,14 @@ import UIKit
 class CalculatorHeaderCell: UICollectionReusableView {
     
     static let identifier = "CalculatorHeaderCell"
-    
-    // MARK: - Variables
-    
+        
     // MARK: - Subviews
-    private let problemLabel: UILabel = {
+    private let numberLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 41, weight: .regular)
-        label.text = "2+7-(390)"
+        label.text = "Error"
         return label
     }()
     
@@ -48,30 +46,31 @@ class CalculatorHeaderCell: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(currentCalcText: String) {
-        self.resultLabel.text = currentCalcText
+    public func configure(currentNumberText: String, currentResultText: String) {
+        self.numberLabel.text = currentNumberText
+        self.resultLabel.text = currentResultText
     }
     
-    // MARK: - UI Setup
+    // MARK: - Setup UI
     private func setupUI() {
         self.backgroundColor = .black
         
-        self.addSubview(problemLabel)
+        self.addSubview(numberLabel)
         self.addSubview(resultLabel)
         self.addSubview(lineView)
         
-        problemLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
         lineView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            problemLabel.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor, constant: 10),
-            problemLabel.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-            problemLabel.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            numberLabel.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor, constant: 40),
+            numberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            numberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             
-            resultLabel.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -5),
-            resultLabel.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-            resultLabel.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            resultLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 40),
+            resultLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            resultLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             
             lineView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
             lineView.heightAnchor.constraint(equalToConstant: 1),
@@ -79,8 +78,4 @@ class CalculatorHeaderCell: UICollectionReusableView {
             lineView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
         ])
     }
-    
-    // MARK: - Selectors
-    
-
 }

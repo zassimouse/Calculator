@@ -10,16 +10,15 @@ import Foundation
 enum CalculatorOperation {
     
     case add
-    case substract
+    case subtract
     case multiply
     case divide
     
     var title: String {
         switch self {
-            
         case .add:
             return "+"
-        case .substract:
+        case .subtract:
             return "-"
         case .multiply:
             return "×"
